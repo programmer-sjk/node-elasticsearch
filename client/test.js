@@ -5,19 +5,22 @@ const client = new Client({
     requestTimeout: 60000,
 })
 
-async function get() {
-    try {
-        const result = await client.search({
-            index: 'my-index',
-            body: {
-              query: {
-                match: { hello: 'world' }
-              }
-            }
-        })
-    } catch(e) {
-        console.log(e)
-    }
+async function customerTest() {
+    await client.index({
+        index: 'customer',
+        id: '2',
+        body: {
+          name: 'seo jeong kuk',
+          age: 2
+        }
+    })
+
+    const { body } = await client.get({
+        index: 'customer',
+        id: '2'
+    })
+    
+    console.log(body)
 }
 
-get()
+customerTest()
