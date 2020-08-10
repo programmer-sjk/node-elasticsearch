@@ -15,12 +15,42 @@ async function customerTest() {
         }
     })
 
-    const { body } = await client.get({
+    const { body, statusCode, headers, meta } = await client.get({
         index: 'customer',
         id: '2'
     })
     
     console.log(body)
+    console.log(statusCode)
+    console.log(headers)
+    console.log(meta)
 }
 
-customerTest()
+async function addCustomers() {
+    for(let i=0; i<3; i++) {
+        const names = ['seo', 'seo jeong', 'seo jeong kuk']
+        await client.index({
+            index: 'customer',
+            id: (i+1).toString(),
+            body: {
+              name: names[i],
+              age: i + 1
+            }
+        })
+    }
+}
+async function searchCustomer() {
+    const { body } = await client.search({
+        index: 'customer',
+        body: {
+          query: {
+            match: { name: 'seo' }
+          }
+        }
+    })
+    console.log(body)
+    console.log(body.hits.hits)
+}
+
+addCustomers()
+searchCustomer()
