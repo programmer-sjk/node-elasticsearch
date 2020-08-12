@@ -1,4 +1,5 @@
 # node-elasticsearch
 learn elasticsearch with nodejs
 
-# 해당 Repo는 완성된게 아니며 추후 
+# P.S
+해당 Repo는 진행 중 계획이 생겨 잠시 중단
